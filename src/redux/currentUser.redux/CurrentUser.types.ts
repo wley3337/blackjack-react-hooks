@@ -1,12 +1,22 @@
-export const FIRST_TYPE: string = "FIRST TYPE"
+// Example from react docs on typescript: https://redux.js.org/recipes/usage-with-typescript
+// src/store/chat/types.ts
 
+export const SET_CURRENT_USER: string = "SET_CURRENT_USER"
+export const LOGOUT: string = "LOGOUT"
 
-interface FirstAction {
-  type: typeof FIRST_TYPE
+export interface CurrentUser{
+    firstName: string,
+    lastName: string,
+    bank: number,
+    username: string
 }
 
+export interface SetUser{
+    type: typeof SET_CURRENT_USER,
+    payload: CurrentUser
+}
 
-export type FirstTypes = FirstAction
+export type CurrentUserActionTypes = SetUser
 
 // Example from react docs on typescript: https://redux.js.org/recipes/usage-with-typescript
 // src/store/chat/types.ts
