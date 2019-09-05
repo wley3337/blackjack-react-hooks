@@ -5,7 +5,8 @@ import {Provider} from 'react-redux'
 import './App.css';
 
 
-import LogIn from '../components/LogIn';
+import CreateUser from '../components/CreateUser';
+import LoginUser from '../components/LoginUser';
 
 const App = () =>  {
 
@@ -13,7 +14,8 @@ const App = () =>  {
    <Provider store={store}>
       <Router>
         <div className="App">
-          <LogIn />
+          <CreateUser />
+          <LoginUser />
         </div>
       </Router>
    </Provider>

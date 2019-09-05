@@ -1,10 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../redux/actions/index'
-import { AppState } from '../redux/reducer'
-import { Action } from 'redux'
 import { CreateUserForm } from '../redux/userCreate.redux/UserCreate.types'
-import { ThunkAction } from 'redux-thunk';
 
 const blankUser: CreateUserForm = {
     firstName: "", 
@@ -12,13 +9,13 @@ const blankUser: CreateUserForm = {
     username: "",
     password: ""
 }
-interface loginProps{
+interface createUserProps{
     //action from connect
     userCreate: (userFrom: CreateUserForm) => void
 }
 
   
-export const LogIn: React.FC<loginProps> = ({userCreate}) => {
+export const CreateUser: React.FC<createUserProps> = ({userCreate}) => {
 
     const[userForm, setUserForm] = useState < CreateUserForm> (blankUser)
  
@@ -81,26 +78,4 @@ export const LogIn: React.FC<loginProps> = ({userCreate}) => {
     )
 }
 
-export default connect(null, actions)(LogIn)
-// const  handleSubmit = async ( user: CreateUserForm ) => {
-//     const options = {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json; charset=utf-8",
-//             Accept: "application/json"
-//         },
-//         body: JSON.stringify({user: user})
-//     }
-//     try{
-//         const r = await fetch(FETCH_URL + '/users', options)
-//         const userObj = await r.json()
-//         console.log(userObj)
-        
-//     }
-//     catch(err) {
-//         console.error("User Creation: ", err ); 
-//     }
-// }
-
-
-// const FETCH_URL: string = "http://localhost:3000"
+export default connect(null, actions)(CreateUser)
