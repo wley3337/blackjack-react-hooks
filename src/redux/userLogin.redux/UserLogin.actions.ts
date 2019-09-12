@@ -22,11 +22,12 @@ export const userLogin = (userLoginForm: userLoginFormType): ThunkAction<Promise
         const resObj = await res.json()
         if(resObj.success){
             localStorage.setItem('token', resObj.token)
+          
             dispatch( setUser( resObj.user ) )
         }
     }
     catch(err){
-        console.error("User Login", err)
+        console.error("User Login: ", err)
     }
 
 }

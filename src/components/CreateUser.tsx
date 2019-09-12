@@ -9,18 +9,18 @@ const blankUser: CreateUserForm = {
     username: "",
     password: ""
 }
+
 interface createUserProps{
     //action from connect
     userCreate: (userFrom: CreateUserForm) => void
 }
 
-  
 export const CreateUser: React.FC<createUserProps> = ({userCreate}) => {
 
     const[userForm, setUserForm] = useState < CreateUserForm> (blankUser)
  
     return (
-        
+       <div className="create-user-wrapper"> 
             <form className="login-form" onSubmit={(e) =>{
                 e.preventDefault()
                 userCreate(userForm)
@@ -74,7 +74,7 @@ export const CreateUser: React.FC<createUserProps> = ({userCreate}) => {
                     <button>Submit</button>
                 </label>
             </form>
-            
+        </div>
     )
 }
 

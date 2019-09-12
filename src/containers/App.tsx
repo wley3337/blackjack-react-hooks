@@ -1,12 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router} from 'react-router-dom'
 import store from '../redux/store'
-import {Provider} from 'react-redux'
+import { Provider } from 'react-redux'
 import './App.css';
-
-
-import CreateUser from '../components/CreateUser';
-import LoginUser from '../components/LoginUser';
+import BlackJack from './BlackJack'
 
 const App = () =>  {
 
@@ -14,12 +11,12 @@ const App = () =>  {
    <Provider store={store}>
       <Router>
         <div className="App">
-          <CreateUser />
-          <LoginUser />
-        </div>
+          <BlackJack />
+       </div>
       </Router>
    </Provider>
   );
 }
+
 
 export default App;
