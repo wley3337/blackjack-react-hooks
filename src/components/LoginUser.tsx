@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../redux/actions'
 import { Link } from 'react-router-dom'
+import { AppState } from '../redux/reducer'
+import { ErrorMessages, ErrorMessageActionTypes } from '../redux/errorMessages.redux/ErrorMessages.types'
+import ErrorMessagesDisplay from './ErrorMessagesDisplay'
 
 interface userLoginForm{
     username: string,
@@ -10,20 +13,26 @@ interface userLoginForm{
 
 
 interface loginUserProps{
+    //actions
     userLogin: (user: userLoginForm) => void
+    clearErrorMessages: ()=> ErrorMessageActionTypes
+    //state 
+    errorMessages: ErrorMessages
 }
 
-export const LoginUser: React.FC<loginUserProps> = ({userLogin}) =>{
+export const LoginUser: React.FC<loginUserProps> = ({userLogin, errorMessages, clearErrorMessages}) =>{
 
     const initialState:userLoginForm = {username: "", password: ""}
     const [userLoginForm, setUserLoginForm] = useState(initialState)
         
     return(
         <div className="login-wrapper">
+            {!(errorMessages.messages.length > 0)? null : <ErrorMessagesDisplay messages={errorMessages.messages}/> }
             <form 
                 className="login-form-wrapper"
                 onSubmit={(e)=>{
                     e.preventDefault()
+                    clearErrorMessages()
                     userLogin(userLoginForm)
                 }}
             >
@@ -56,5 +65,5 @@ export const LoginUser: React.FC<loginUserProps> = ({userLogin}) =>{
         </div>
     )
 }
-
-export default connect(null, actions)(LoginUser)
+const mSTP = ( state: AppState ) =>({ errorMessages: state.errorMessages })
+export default connect(mSTP, actions)(LoginUser)

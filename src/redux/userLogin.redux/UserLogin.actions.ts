@@ -1,4 +1,4 @@
-import { BASE_URL } from "../actions";
+import { BASE_URL, addErrorMessages } from "../actions";
 import { ThunkAction } from 'redux-thunk'
 import { AppState } from '../reducer'
 import { AnyAction } from 'redux'
@@ -22,8 +22,10 @@ export const userLogin = (userLoginForm: userLoginFormType): ThunkAction<Promise
         const resObj = await res.json()
         if(resObj.success){
             localStorage.setItem('token', resObj.token)
-          
             dispatch( setUser( resObj.user ) )
+        }
+        if(!resObj.success){
+            dispatch( addErrorMessages( resObj.errors ) )
         }
     }
     catch(err){
