@@ -11,7 +11,7 @@ interface blackJackProps{
     currentUser: CurrentUser
 }
 
-{/* the logic here should be onComponent did mount check for a token, if token get user if no token login */}
+//the logic here should be onComponent did mount check for a token, if token get user if no token login 
 const BlackJack: React.FC<blackJackProps> = ({currentUser}) =>{
     console.log("User Name", currentUser)
     return (
