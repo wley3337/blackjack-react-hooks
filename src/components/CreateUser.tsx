@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../redux/actions/index'
 import { CreateUserForm } from '../redux/userCreate.redux/UserCreate.types'
+import { ErrorMessages, ErrorMessageActionTypes } from '../redux/errorMessages.redux/ErrorMessages.types'
+import { AppState } from '../redux/reducer'
+import ErrorMessagesDisplay from './ErrorMessagesDisplay'
 
 const blankUser: CreateUserForm = {
     firstName: "", 
@@ -12,17 +15,22 @@ const blankUser: CreateUserForm = {
 
 interface createUserProps{
     //action from connect
-    userCreate: (userFrom: CreateUserForm) => void
+    userCreate: (userFrom: CreateUserForm) => void,
+    clearErrorMessages: ()=> ErrorMessageActionTypes,
+    errorMessages: ErrorMessages
+
 }
 
-export const CreateUser: React.FC<createUserProps> = ({userCreate}) => {
+export const CreateUser: React.FC<createUserProps> = ({userCreate, errorMessages, clearErrorMessages}) => {
 
     const[userForm, setUserForm] = useState < CreateUserForm> (blankUser)
  
     return (
        <div className="create-user-wrapper"> 
+            {!(errorMessages.messages.length > 0) ? null: <ErrorMessagesDisplay messages={errorMessages.messages}/>}
             <form className="login-form" onSubmit={(e) =>{
                 e.preventDefault()
+                clearErrorMessages()
                 userCreate(userForm)
             } }>
                 <label>
@@ -78,4 +86,7 @@ export const CreateUser: React.FC<createUserProps> = ({userCreate}) => {
     )
 }
 
-export default connect(null, actions)(CreateUser)
+
+const mSTP = (state: AppState) => ({ errorMessages: state.errorMessages})
+
+export default connect(mSTP, actions)(CreateUser)

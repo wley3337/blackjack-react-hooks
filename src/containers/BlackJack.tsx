@@ -10,7 +10,7 @@ interface BlackJackProps{
 }
 
 //the logic here should be onComponent did mount check for a token, if token get user if no token login 
-const blackJack: React.FC<BlackJackProps> = ({currentUser}) =>{
+const BlackJack: React.FC<BlackJackProps> = ({currentUser}) =>{
     console.log("User Name", currentUser)
     return (
         <div>
@@ -22,4 +22,4 @@ const blackJack: React.FC<BlackJackProps> = ({currentUser}) =>{
 const mSTP = (state: AppState) =>({
     currentUser: state.currentUser
 })
-export default withRouter(connect(mSTP)(blackJack))
+export default withRouter(connect(mSTP)(BlackJack))

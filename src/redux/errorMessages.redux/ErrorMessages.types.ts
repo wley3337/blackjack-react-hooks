@@ -1,12 +1,18 @@
-export const ADD_ERROR_MESSAGE: string = "ADD_ERROR_MESSAGE"
+export const ADD_ERROR_MESSAGES: string = "ADD_ERROR_MESSAGES"
+export const CLEAR_ERROR_MESSAGES: string = "CLEAR_ERROR_MESSAGES"
 
 export interface ErrorMessages{
     messages: Array<string>
 }
 
 export interface AddErrorMessage{
-    type: typeof ADD_ERROR_MESSAGE,
+    type: typeof ADD_ERROR_MESSAGES,
     payload: ErrorMessages
-}
+};
 
-export type ErrorMessageActionTypes = AddErrorMessage
+export interface ClearErrorMessages{
+    type: typeof CLEAR_ERROR_MESSAGES,
+    payload: ErrorMessages
+};
+
+export type ErrorMessageActionTypes = AddErrorMessage | ClearErrorMessages
