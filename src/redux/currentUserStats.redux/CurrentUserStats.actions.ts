@@ -10,19 +10,24 @@ export const setCurrentUserStats = (currentUserStats: CurrentUserStats): Current
 
 export const getCurrentUserStats = ():ThunkAction<Promise<void>, AppState, null, AnyAction> => async (dispatch) => {
     const token = localStorage.getItem('token')
+    console.log('token:', token)
     const options = {
         method: "GET",
         headers: {
             "Content-Type": "application/json; charset=utf-8",
             Accept: "application/json",
-            "Authorization": `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         }
     }
-
-    const res = await fetch(BASE_URL + '/user-statistics', options)
-    const resObj = await res.json()
-
-    if(resObj.success){
-        debugger
+    try{
+        const res = await fetch(BASE_URL + '/user_hands', options)
+        const resObj = await res.json()
+    
+        if(resObj.success){
+            dispatch( setCurrentUserStats(resObj.user_stats) )
+        }
+    }
+    catch(err){
+        console.error("User Stats: ", err)
     }
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../redux/actions'
-import { Link } from 'react-router-dom'
+import { Link, RouteComponentProps } from 'react-router-dom'
 import { AppState } from '../redux/reducer'
 import { ErrorMessages, ErrorMessageActionTypes } from '../redux/errorMessages.redux/ErrorMessages.types'
 import ErrorMessagesDisplay from './ErrorMessagesDisplay'
@@ -12,16 +12,15 @@ interface userLoginForm{
 }
 
 
-interface loginUserProps{
+interface loginUserProps extends RouteComponentProps{
     //actions
-    userLogin: (user: userLoginForm) => void
+    userLogin: (user: userLoginForm, history:any) => void
     clearErrorMessages: ()=> ErrorMessageActionTypes
     //state 
-    errorMessages: ErrorMessages
+    errorMessages: ErrorMessages,
 }
 
-export const LoginUser: React.FC<loginUserProps> = ({userLogin, errorMessages, clearErrorMessages}) =>{
-
+export const LoginUser: React.FC<loginUserProps> = ({userLogin, errorMessages, clearErrorMessages, history}) =>{
     const initialState:userLoginForm = {username: "", password: ""}
     const [userLoginForm, setUserLoginForm] = useState(initialState)
         
@@ -33,7 +32,7 @@ export const LoginUser: React.FC<loginUserProps> = ({userLogin, errorMessages, c
                 onSubmit={(e)=>{
                     e.preventDefault()
                     clearErrorMessages()
-                    userLogin(userLoginForm)
+                    userLogin(userLoginForm, history)
                 }}
             >
                 <label>

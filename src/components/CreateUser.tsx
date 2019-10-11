@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../redux/actions/index'
 import { CreateUserForm } from '../redux/userCreate.redux/UserCreate.types'
+import { RouteComponentProps } from 'react-router-dom'
 import { ErrorMessages, ErrorMessageActionTypes } from '../redux/errorMessages.redux/ErrorMessages.types'
 import { AppState } from '../redux/reducer'
 import ErrorMessagesDisplay from './ErrorMessagesDisplay'
@@ -13,15 +14,15 @@ const blankUser: CreateUserForm = {
     password: ""
 }
 
-interface createUserProps{
+interface createUserProps extends RouteComponentProps{
     //action from connect
-    userCreate: (userFrom: CreateUserForm) => void,
+    userCreate: (userFrom: CreateUserForm, history:any) => void,
     clearErrorMessages: ()=> ErrorMessageActionTypes,
     errorMessages: ErrorMessages
 
 }
 
-export const CreateUser: React.FC<createUserProps> = ({userCreate, errorMessages, clearErrorMessages}) => {
+export const CreateUser: React.FC<createUserProps> = ({userCreate, errorMessages, clearErrorMessages, history}) => {
 
     const[userForm, setUserForm] = useState < CreateUserForm> (blankUser)
  
@@ -31,7 +32,7 @@ export const CreateUser: React.FC<createUserProps> = ({userCreate, errorMessages
             <form className="login-form" onSubmit={(e) =>{
                 e.preventDefault()
                 clearErrorMessages()
-                userCreate(userForm)
+                userCreate(userForm, history)
             } }>
                 <label>
                     First Name:
