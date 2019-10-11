@@ -33,3 +33,28 @@ export const userLogin = (userLoginForm: userLoginFormType, history: History): T
     }
 
 }
+
+
+export const getUser = (history: History): ThunkAction<Promise<void>, AppState, null, AnyAction> => async (dispatch) =>{
+    const token = localStorage.getItem('token')
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json; charset=utf-8",
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`
+        }
+    }
+    try{
+        const res = await fetch(BASE_URL + '/user', options)
+        const resObj = await res.json()
+    
+        if(resObj.success){
+            dispatch( setUser(resObj.user) )
+            history.push('/my-games')
+        }
+    }
+    catch(err){
+        console.error("Get User: ", err)
+    }
+}

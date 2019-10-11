@@ -10,7 +10,7 @@ export const setCurrentUserStats = (currentUserStats: CurrentUserStats): Current
 
 export const getCurrentUserStats = ():ThunkAction<Promise<void>, AppState, null, AnyAction> => async (dispatch) => {
     const token = localStorage.getItem('token')
-    console.log('token:', token)
+
     const options = {
         method: "GET",
         headers: {

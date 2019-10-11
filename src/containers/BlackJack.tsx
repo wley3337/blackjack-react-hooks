@@ -5,6 +5,7 @@ import LandingPage from '../components/LandingPage';
 import { AppState } from '../redux/reducer'
 import { CurrentUser } from '../redux/currentUser.redux/CurrentUser.types';
 import UserShow from './UserShow';
+import AutoLogin from '../components/AutoLogin'
 
 interface BlackJackProps{
     currentUser: CurrentUser
@@ -14,7 +15,8 @@ interface BlackJackProps{
 const BlackJack: React.FC<BlackJackProps> = ({currentUser}) =>{
     return (
         <div>
-          { (localStorage.token && currentUser.username) ? <Route path="/my-games" component={UserShow}/> : <Route path ="/" component={LandingPage}/> }
+          { (localStorage.token && !currentUser.firstName) ?  <Route path="/" render={(props:any) => <AutoLogin {...props}/>} /> : <Route path ="/" component={LandingPage}/> }
+          <Route path="/my-games" component={UserShow}/>
         </div>
     )
 }
