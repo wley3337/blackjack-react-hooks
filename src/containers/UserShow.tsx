@@ -13,7 +13,7 @@ interface UserShowProps{
     getCurrentUserStats: () => void
 }
 
-const UserShow: React.FC<UserShowProps> = ({ currentUser, getCurrentUserStats, currentUserStats }) =>{
+export const UserShow: React.FC<UserShowProps> = ({ currentUser, getCurrentUserStats, currentUserStats }) =>{
     
     useEffect(() => { getCurrentUserStats(); return undefined }, [currentUser])
   

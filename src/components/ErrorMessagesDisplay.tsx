@@ -5,7 +5,7 @@ interface ErrorMessagesProps{
 }
 
 
-const ErrorMessagesDisplay: React.FC<ErrorMessagesProps> = ({ messages}):any =>{
+export const ErrorMessagesDisplay: React.FC<ErrorMessagesProps> = ({ messages}):any =>{
     return(
     <div className="errors">
         {messages.map((error:string, index: number) => <p key={`error-${index}`}>{error}</p>)}

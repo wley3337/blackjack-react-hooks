@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom'
 import CreateUser from '../components/CreateUser';
 import LoginUser from '../components/LoginUser';
 
-const LandingPage = () =>{
+export const LandingPage = () =>{
     return (
         <div>
             <Route exact path="/" render={(props:any)=><LoginUser {...props} />}/>

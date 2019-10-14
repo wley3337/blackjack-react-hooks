@@ -12,7 +12,7 @@ interface BlackJackProps{
 }
 
 //the logic here should be onComponent did mount check for a token, if token get user if no token login 
-const BlackJack: React.FC<BlackJackProps> = ({currentUser}) =>{
+export const BlackJack: React.FC<BlackJackProps> = ({currentUser}) =>{
     return (
         <div>
           { (localStorage.token && !currentUser.firstName) ?  <Route path="/" render={(props:any) => <AutoLogin {...props}/>} /> : <Route path ="/" component={LandingPage}/> }

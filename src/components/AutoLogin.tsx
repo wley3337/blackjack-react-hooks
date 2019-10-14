@@ -11,7 +11,7 @@ interface AutoLoginProps extends RouteComponentProps{
 }
 
 
-const AutoLogin: React.FC<AutoLoginProps> = ({getUser, history}) => {
+export const AutoLogin: React.FC<AutoLoginProps> = ({getUser, history}) => {
     getUser(history)
     return (null)
 }

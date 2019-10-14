@@ -1,17 +1,20 @@
-import React from 'react';
-import {CreateUser} from '../../src/components/CreateUser';
-import { shallow } from 'enzyme'
 
-describe('<CreateUser/>', ()=>{
+import React from 'react';
+import { shallow } from 'enzyme'
+import { LoginUser } from './LoginUser'
+
+describe('<LoginUser/>', ()=>{
     const props: any = {
-        userCreate: jest.fn(),
+        userLogin: jest.fn(),
         clearErrorMessages: jest.fn(),
-        errorMessages: { messages: [] }
+        errorMessages: {messages: []},
+        password: "",
+        username: ""
     }
 
     it('successfully renders the component', ()=>{
         const wrapper: any = shallow(
-                <CreateUser {...props} />
+                <LoginUser {...props} />
         );
         expect(wrapper).toBeDefined();
     })
